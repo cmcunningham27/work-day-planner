@@ -1,8 +1,8 @@
-const today = moment();
-$("#currentDay").text(today.format("dddd MMMM Do"));
+let currentDay;
+let currentHour;
+
+
 let rowHour;
-let currentHour = parseInt(today.format("H"));
-console.log(currentHour);
 let rowIdStr;
 let input; 
 let rows = $(".row");
@@ -11,6 +11,20 @@ let h4 = $(".hour")
 console.log(rows);
  
 
+const update = function() {
+    const today = moment();
+    currentDay.text(today.format("dddd MMMM Do"));
+    currentHour = moment().format("H");
+    // console.log(currentHour);
+}
+
+setInterval(function(){
+    $(document).ready(function() {
+        currentDay = $("#currentDay");
+        update();
+
+    })
+}, 1000);
 
 
 
@@ -35,8 +49,8 @@ console.log(rows);
 // })
 
 
-button.on("click", function(event) {
-    console.log(event);
+button.on("click", function() {
+    console.log(this);
     // let store = input.value
     // localStorage.setItem(, store);     
 })
