@@ -1,26 +1,18 @@
-let currentDay;
-let currentHour;
-
-
+let currentDay = $("#currentDay");
+let currentHour; 
 let rowHour;
-let rowIdStr;
-let rows = $(".row");
 let button = $(".saveBtn");
-let h4 = $(".hour")
-console.log(rows);
  
 //Allows the DOM to keep track of the date and hour every second the user is on the website 
 const update = function() {
-    const today = moment();
-    currentDay.text(today.format("dddd MMMM Do"));
-    currentHour = moment().format("H");
-    // console.log(currentHour);
+    currentHour = parseInt(moment().format("H"));
+    console.log(currentHour);
     function background(){
         $(".time-block").each(function(){
             // console.log($(this).attr("id"));
             rowHour = parseInt($(this).attr("id"));
             // console.log(rowHour);
-            currentHour = parseInt(moment().format("H"));
+            // currentHour = parseInt(moment().format("H"));
             // console.log(currentHour);
             if (currentHour > rowHour) {
                 $(this).addClass("past");
@@ -33,18 +25,22 @@ const update = function() {
         
     }
     background();
-    console.log()
 }
 
 //creates a second interval and calls the update function
 setInterval(function(){
     //After the HTML and CSS have been loaded and the DOM is now ready for the Javascript code to execute
     $(document).ready(function() {
-        currentDay = $("#currentDay");
+    //     currentDay = $("#currentDay");
+    //     // const today = moment();
+    // currentDay.text(moment().format("dddd MMMM Do"));
         update();
 
     })
 }, 1000);
+        
+
+currentDay.text(moment().format("dddd MMMM Do"));
 
 //when the user clicks on a row's button to save their event, this will log their event and the corresponding time to their local storage
 button.on("click", function() {
