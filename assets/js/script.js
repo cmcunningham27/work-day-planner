@@ -8,15 +8,41 @@ let rows = $(".row");
 let button = $(".saveBtn");
 let h4 = $(".hour")
 console.log(rows);
+ 
+//Allows the DOM to keep track of the date and hour every second the user is on the website 
+const update = function() {
+    const today = moment();
+    currentDay.text(today.format("dddd MMMM Do"));
+    currentHour = moment().format("H");
+    // console.log(currentHour);
+    function background(){
+        $(".time-block").each(function(){
+            // console.log($(this).attr("id"));
+            rowHour = parseInt($(this).attr("id"));
+            // console.log(rowHour);
+            currentHour = parseInt(moment().format("H"));
+            // console.log(currentHour);
+            if (currentHour > rowHour) {
+                $(this).addClass("past");
+            } else if (currentHour === rowHour) {
+                $(this).addClass("present");
+            }else {
+                $(this).addClass("future");
+            }  
+        })
+        
+    }
+    background();
+    console.log()
+}
 
-//creates a seconds interval, keeps track of hour every second, and prints the date on the DOM
+//creates a second interval and calls the update function
 setInterval(function(){
     //After the HTML and CSS have been loaded and the DOM is now ready for the Javascript code to execute
     $(document).ready(function() {
         currentDay = $("#currentDay");
-        currentDay.text(moment().format("dddd MMMM Do"));
-        currentHour = moment().format("H");
-        console.log(currentHour);
+        update();
+
     })
 }, 1000);
 
@@ -32,13 +58,28 @@ $("#9AM textarea").val(localStorage.getItem("9AM"));
 $("#10AM textarea").val(localStorage.getItem("10AM"));
 $("#11AM textarea").val(localStorage.getItem("11AM"));
 $("#12PM textarea").val(localStorage.getItem("12PM"));
-$("#1PM textarea").val(localStorage.getItem("1PM"));
-$("#2PM textarea").val(localStorage.getItem("2PM"));
-$("#3PM textarea").val(localStorage.getItem("3PM"));
-$("#4PM textarea").val(localStorage.getItem("4PM"));
-$("#5PM textarea").val(localStorage.getItem("5PM"));
+$("#13PM textarea").val(localStorage.getItem("13PM"));
+$("#14PM textarea").val(localStorage.getItem("14PM"));
+$("#15PM textarea").val(localStorage.getItem("15PM"));
+$("#16PM textarea").val(localStorage.getItem("16PM"));
+$("#17PM textarea").val(localStorage.getItem("17PM"));
 
 //
-function trackTime(){
-
-}
+// function background(){
+//     $(".time-block").each(function(){
+//         // console.log($(this).attr("id"));
+//         rowHour = parseInt($(this).attr("id"));
+//         // console.log(rowHour);
+//         currentHour = parseInt(moment().format("H"));
+//         // console.log(currentHour);
+//         if (currentHour > rowHour) {
+//             $(this).addClass("past");
+//         } else if (currentHour === rowHour) {
+//             $(this).addClass("present");
+//         }else {
+//             $(this).addClass("future");
+//         }  
+//     })
+    
+// }
+// background();
