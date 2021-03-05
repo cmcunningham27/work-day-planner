@@ -1,23 +1,10 @@
 //Declares variables for elements or ones that will be used later in the code
 let currentDay = $("#currentDay");
 let button = $(".saveBtn");
+let timeBlock = $(".time-block");
 let currentHour; 
 let rowHour;
- 
-//Allows the DOM to keep track of the date and hour every second the user is on the website 
-const update = function() {
-    currentHour = (moment().format("H"));
-    console.log(currentHour);
-}
 
-//creates a second interval and calls the update function
-setInterval(function(){
-    //After the HTML and CSS have been loaded and the DOM is now ready for the Javascript code to execute
-    $(document).ready(function() {
-        update();
-    })
-}, 1000);
-        
 //Prints date immediatelly in the jumbotron upon opening DOM
 currentDay.text(moment().format("dddd MMMM Do"));
 
@@ -42,7 +29,7 @@ $("#17PM textarea").val(localStorage.getItem("17PM"));
 //Styles each rown with a color to indicate whether it is a past hour, the present hour, or a future hour
 function background(){
     //loop for each row
-    $(".time-block").each(function(){
+    timeBlock.each(function(){
         //turns id into an integer
         rowHour = parseInt($(this).attr("id"));
         //turns time into an integer
