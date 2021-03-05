@@ -1,45 +1,24 @@
+//Declares variables for elements or ones that will be used later in the code
 let currentDay = $("#currentDay");
+let button = $(".saveBtn");
 let currentHour; 
 let rowHour;
-let button = $(".saveBtn");
  
 //Allows the DOM to keep track of the date and hour every second the user is on the website 
 const update = function() {
-    currentHour = parseInt(moment().format("H"));
+    currentHour = (moment().format("H"));
     console.log(currentHour);
-    function background(){
-        $(".time-block").each(function(){
-            // console.log($(this).attr("id"));
-            rowHour = parseInt($(this).attr("id"));
-            // console.log(rowHour);
-            // currentHour = parseInt(moment().format("H"));
-            // console.log(currentHour);
-            if (currentHour > rowHour) {
-                $(this).addClass("past");
-            } else if (currentHour === rowHour) {
-                $(this).addClass("present");
-            }else {
-                $(this).addClass("future");
-            }  
-        })
-        
-    }
-    background();
 }
 
 //creates a second interval and calls the update function
 setInterval(function(){
     //After the HTML and CSS have been loaded and the DOM is now ready for the Javascript code to execute
     $(document).ready(function() {
-    //     currentDay = $("#currentDay");
-    //     // const today = moment();
-    // currentDay.text(moment().format("dddd MMMM Do"));
         update();
-
     })
 }, 1000);
         
-
+//Prints date immediatelly in the jumbotron upon opening DOM
 currentDay.text(moment().format("dddd MMMM Do"));
 
 //when the user clicks on a row's button to save their event, this will log their event and the corresponding time to their local storage
@@ -49,7 +28,7 @@ button.on("click", function() {
     localStorage.setItem(time, text);  
 });
 
-//gets events that were logged in local storage and puts them in their corresponding rows
+//gets events that were logged in local storage previously and prints them on the DOM in their corresponding rows
 $("#9AM textarea").val(localStorage.getItem("9AM"));
 $("#10AM textarea").val(localStorage.getItem("10AM"));
 $("#11AM textarea").val(localStorage.getItem("11AM"));
@@ -60,22 +39,22 @@ $("#15PM textarea").val(localStorage.getItem("15PM"));
 $("#16PM textarea").val(localStorage.getItem("16PM"));
 $("#17PM textarea").val(localStorage.getItem("17PM"));
 
-//
-// function background(){
-//     $(".time-block").each(function(){
-//         // console.log($(this).attr("id"));
-//         rowHour = parseInt($(this).attr("id"));
-//         // console.log(rowHour);
-//         currentHour = parseInt(moment().format("H"));
-//         // console.log(currentHour);
-//         if (currentHour > rowHour) {
-//             $(this).addClass("past");
-//         } else if (currentHour === rowHour) {
-//             $(this).addClass("present");
-//         }else {
-//             $(this).addClass("future");
-//         }  
-//     })
-    
-// }
-// background();
+//Styles each rown with a color to indicate whether it is a past hour, the present hour, or a future hour
+function background(){
+    //loop for each row
+    $(".time-block").each(function(){
+        //turns id into an integer
+        rowHour = parseInt($(this).attr("id"));
+        //turns time into an integer
+        currentHour = parseInt(moment().format("H"));
+        if (currentHour > rowHour) {
+            $(this).addClass("past");
+        } else if (currentHour === rowHour) {
+            $(this).addClass("present");
+        }else {
+            $(this).addClass("future");
+        }  
+    })
+}
+//calls the function to apply colors to each row
+background();
