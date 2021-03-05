@@ -16,7 +16,7 @@ A calendar application for a single work day that allows users to save events fo
 
 &nbsp;
 
-## The following image shows how the webpage appears on a desktop after a password has been generated
+## The following image shows how the webpage appears on a desktop
 
 ---
 
